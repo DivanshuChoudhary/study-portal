@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Advanced Study Portal</title>
+
+<style>
+/* =========================
+   ROOT THEME SYSTEM
+========================= */
+:root {
+  --bg: #0b1220;
+  --card: rgba(255,255,255,0.06);
+  --text: #e5e7eb;
+  --accent: #60a5fa;
+  --good: #22c55e;
+  --danger: #ef4444;
+  --border: rgba(255,255,255,0.1);
+}
+
+.light {
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --text: #0f172a;
+  --accent: #2563eb;
+  --border: rgba(0,0,0,0.1);
+}
+
+/* =========================
+   GLOBAL STYLES
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.container {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  background: var(--card);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar h2 {
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.menu button {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.menu button:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* =========================
+   MAIN AREA
+========================= */
+.main {
+  padding: 20px;
+}
+
+/* SECTIONS */
+.section {
+  display: none;
+  animation: fade 0.3s ease-in;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fade {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================
+   CARDS
+========================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 15px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* =========================
+   PROGRESS BAR
+========================= */
+.progress {
+  margin-top: 20px;
+}
+
+.bar {
+  height: 10px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  width: 70%;
+  background: var(--good);
+  transition: 1s;
+}
+
+/* =========================
+   INPUTS
+========================= */
+input {
+  padding: 10px;
+  width: 70%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+}
+
+button.add {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+/* LIST ITEMS */
+.item {
+  margin-top: 10px;
+  padding: 10px;
+  background: var(--card);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>📚 Study Portal</h2>
+    <div class="menu">
+      <button onclick="show('dashboard')">Dashboard</button>
+      <button onclick="show('subjects')">Subjects</button>
+      <button onclick="show('tasks')">Tasks</button>
+      <button onclick="show('notes')">Notes</button>
+      <button onclick="show('settings')">Settings</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h2 id="title">Dashboard</h2>
+      <button onclick="toggleTheme()">Toggle Theme</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="section active">
+      <div class="grid">
+        <div class="card">📘 Math Progress</div>
+        <div class="card">🔬 Science Lab</div>
+        <div class="card">💻 Coding Practice</div>
+        <div class="card">📖 English Grammar</div>
+      </div>
+
+      <div class="progress">
+        <h3>Overall Progress</h3>
+        <div class="bar"><div class="fill"></div></div>
+      </div>
+    </div>
+
+    <!-- SUBJECTS -->
+    <div id="subjects" class="section">
+      <div class="grid">
+        <div class="card">Math - Algebra</div>
+        <div class="card">Science - Physics</div>
+        <div class="card">Computer - HTML/CSS</div>
+        <div class="card">English - Writing</div>
+      </div>
+    </div>
+
+    <!-- TASKS -->
+    <div id="tasks" class="section">
+      <h3>Task Manager</h3><br>
+      <input id="taskInput" placeholder="Add new task..." />
+      <button class="add" onclick="addTask()">Add</button>
+
+      <div id="taskList"></div>
+    </div>
+
+    <!-- NOTES -->
+    <div id="notes" class="section">
+      <h3>Quick Notes</h3><br>
+      <input id="noteInput" placeholder="Write note..." />
+      <button class="add" onclick="addNote()">Add</button>
+
+      <div id="noteList"></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="settings" class="section">
+      <h3>Settings</h3>
+      <p>• Theme switch available</p>
+      <p>• Responsive layout enabled</p>
+      <p>• Clean UI system</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+/* =========================
+   SECTION SWITCHING
+========================= */
+function show(id) {
+  document.querySelectorAll('.section').forEach(sec => {
+    sec.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  document.getElementById('title').innerText =
+    id.charAt(0).toUpperCase() + id.slice(1);
+}
+
+/* =========================
+   THEME TOGGLE
+========================= */
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+
+/* =========================
+   TASK SYSTEM
+========================= */
+function addTask() {
+  const input = document.getElementById("taskInput");
+  if (!input.value) return;
+
+  const div = document.createElement("div");
+  div.className = "item";
+  div.innerHTML = `
+    <span>${input.value}</span>
+    <span onclick="this.parentElement.remove()">❌</span>
+  `;
+
+  document.getElementById("taskList").appendChild(div);
+  input.value = "";
+}
+
+/* =========================
+   NOTES SYSTEM
+========================= */
+function addNote() {
+  const input = document.getElementById("noteInput");
+  if (!input.value) return;
+
+  const div = document.createElement("div");
+  div.className = "item";
+  div.innerHTML = `
+    <span>${input.value}</span>
+    <span onclick="this.parentElement.remove()">❌</span>
+  `;
+
+  document.getElementById("noteList").appendChild(div);
+  input.value = "";
+}
+
+</script>
+
+</body>
+</html>
